@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light">#FFECECEC</color>
+    <color name="medium">#FFD8D8D8</color>
+    <color name="dark">#FF6D6D80</color>
+    <color name="red">#FFFF3466</color>
+
+    <color name="background">#FF191926</color>
+    <color name="rating">@color/white</color>
+    <color name="title">@color/light</color>
+    <color name="genre">@color/red</color>
+    <color name="reviews">@color/dark</color>
+    <color name="section">@color/light</color>
+    <color name="storyline">@color/medium</color>
+    <color name="actor">@color/medium</color>
 </resources>

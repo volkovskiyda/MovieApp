@@ -90,4 +90,15 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="avengers_end_game">Avengers:\nEnd game</string>
+    <string name="action_adventure_fantasy">Action, Adventure, Fantasy</string>
+    <string name="reviews_125">125 reviews</string>
+    <string name="storyline">Storyline</string>
+    <string name="storyline_avengers">After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.</string>
+    <string name="cast">Cast</string>
+    <string name="rating_13">13+</string>
+    <string name="actor_robert">Robert Downey Jr.</string>
+    <string name="actor_chris_e">Chris Evans</string>
+    <string name="actor_mark">Mark Ruffalo</string>
+    <string name="actor_chris_h">Chris Hemsworth</string>
 </resources>
