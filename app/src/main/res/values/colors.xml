@@ -20,4 +20,5 @@
     <color name="section">@color/light</color>
     <color name="storyline">@color/medium</color>
     <color name="actor">@color/medium</color>
+    <color name="duration">#565665</color>
 </resources>

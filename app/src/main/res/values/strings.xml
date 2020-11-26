@@ -90,6 +90,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="movie_list_avengers_end_game">Avengers: End game</string>
     <string name="avengers_end_game">Avengers:\nEnd game</string>
     <string name="action_adventure_fantasy">Action, Adventure, Fantasy</string>
     <string name="reviews_125">125 reviews</string>
@@ -101,4 +102,6 @@
     <string name="actor_chris_e">Chris Evans</string>
     <string name="actor_mark">Mark Ruffalo</string>
     <string name="actor_chris_h">Chris Hemsworth</string>
+    <string name="avengers_duration">137 min</string>
+    <string name="movies_list">Movies list</string>
 </resources>
