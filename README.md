@@ -5,3 +5,5 @@
 [`Ep 01`](https://youtu.be/mPKpoz3BTRA)
 
 [`Ep 02`](https://youtu.be/qbDAmUJw01k)
+
+[`Ep 03`](https://youtu.be/KbgFlVkyB9E)
