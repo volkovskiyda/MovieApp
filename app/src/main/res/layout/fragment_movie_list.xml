@@ -1,122 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/screen_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/content_padding">
+        android:layout_margin="@dimen/content_padding"
+        android:drawablePadding="8dp"
+        android:text="@string/movies_list"
+        android:textColor="@color/title"
+        app:drawableStartCompat="@drawable/ic_crosshair"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/screen_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:text="@string/movies_list"
-            android:textColor="@color/title"
-            app:drawableStartCompat="@drawable/ic_crosshair"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/movie_avengers"
-            app:layout_constraintDimensionRatio=".7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/screen_title"
-            app:layout_constraintWidth_percent=".4" />
-
-        <ImageView
-            android:id="@+id/avengers_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/movie_list_image_gradient"
-            app:layout_constraintBottom_toBottomOf="@id/duration"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintTop_toTopOf="@id/image" />
-
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/movie_list_rating"
-            android:padding="4dp"
-            android:text="@string/rating_13"
-            android:textColor="@color/rating"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintTop_toTopOf="@id/image" />
-
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="12dp"
-            android:src="@drawable/ic_like"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintTop_toTopOf="@id/image" />
-
-        <TextView
-            android:id="@+id/genre"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="@string/action_adventure_fantasy"
-            android:textColor="@color/genre"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toTopOf="@id/review_bar"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            tools:ignore="SmallSp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".3" />
-
-        <include
-            android:id="@+id/review_bar"
-            layout="@layout/review_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/image"
-            app:layout_constraintEnd_toEndOf="@id/guideline"
-            app:layout_constraintStart_toStartOf="@id/image" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="@string/movie_list_avengers_end_game"
-            android:textColor="@color/title"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintTop_toBottomOf="@id/image" />
-
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/avengers_duration"
-            android:textColor="@color/duration"
-            android:textSize="8sp"
-            app:layout_constraintEnd_toEndOf="@id/image"
-            app:layout_constraintStart_toStartOf="@id/image"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:ignore="SmallSp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/screen_title"
+        app:spanCount="2"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_movie" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,14 +26,64 @@
             android:textColor="@color/genre"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/review_bar"
-            layout="@layout/review_bar"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/star_1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/content_padding"
             android:layout_marginTop="8dp"
+            android:src="@drawable/ic_star_fill"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/genre" />
+
+        <ImageView
+            android:id="@+id/star_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_star_fill"
+            app:layout_constraintStart_toEndOf="@id/star_1"
+            app:layout_constraintTop_toTopOf="@id/star_1" />
+
+        <ImageView
+            android:id="@+id/star_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_star_fill"
+            app:layout_constraintStart_toEndOf="@id/star_2"
+            app:layout_constraintTop_toTopOf="@id/star_1" />
+
+        <ImageView
+            android:id="@+id/star_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_star_fill"
+            app:layout_constraintStart_toEndOf="@id/star_3"
+            app:layout_constraintTop_toTopOf="@id/star_1" />
+
+        <ImageView
+            android:id="@+id/star_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintStart_toEndOf="@id/star_4"
+            app:layout_constraintTop_toTopOf="@id/star_1" />
+
+        <TextView
+            android:id="@+id/reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/reviews_125"
+            android:textAllCaps="true"
+            android:textColor="@color/reviews"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/star_1"
+            app:layout_constraintStart_toEndOf="@id/star_5"
+            app:layout_constraintTop_toTopOf="@id/star_1" />
 
         <TextView
             android:id="@+id/storyline_title"
@@ -44,7 +94,7 @@
             android:text="@string/storyline"
             android:textColor="@color/section"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/review_bar" />
+            app:layout_constraintTop_toBottomOf="@id/star_1" />
 
         <TextView
             android:id="@+id/storyline"

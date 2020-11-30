@@ -21,4 +21,5 @@
     <color name="storyline">@color/medium</color>
     <color name="actor">@color/medium</color>
     <color name="duration">#565665</color>
+    <color name="movie_background">@color/dark</color>
 </resources>
