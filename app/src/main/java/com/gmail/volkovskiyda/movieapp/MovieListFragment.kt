@@ -33,12 +33,5 @@ class MovieListFragment : Fragment() {
             )
         )
         movieListAdapter.submitList(movies)
-//        view.findViewById<View>(R.id.avengers_container).setOnClickListener {
-//            activity?.let { activity -> (activity as MovieClickListener).onMovieClicked() }
-//        }
-    }
-
-    interface MovieClickListener {
-        fun onMovieClicked()
     }
 }
