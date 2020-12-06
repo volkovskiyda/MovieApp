@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/content_padding"
             android:layout_marginTop="@dimen/content_padding"
-            android:text="@string/action_adventure_fantasy"
+            tools:text="@string/action_adventure_fantasy"
             android:textColor="@color/genre"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -118,101 +118,16 @@
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/storyline" />
 
-        <ImageView
-            android:id="@+id/robert_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cast"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/content_padding"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/actor_robert"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toStartOf="@id/chris_e_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cast_title" />
-
-        <ImageView
-            android:id="@+id/chris_e_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/actor_chris_e"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toStartOf="@id/mark_image"
-            app:layout_constraintStart_toEndOf="@id/robert_image"
-            app:layout_constraintTop_toTopOf="@id/robert_image" />
-
-        <ImageView
-            android:id="@+id/mark_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/actor_mark"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toStartOf="@id/chris_h_image"
-            app:layout_constraintStart_toEndOf="@id/chris_e_image"
-            app:layout_constraintTop_toTopOf="@id/robert_image" />
-
-        <ImageView
-            android:id="@+id/chris_h_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="@dimen/content_padding"
-            android:src="@drawable/actor_chris_h"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/mark_image"
-            app:layout_constraintTop_toTopOf="@id/robert_image" />
-
-        <TextView
-            android:id="@+id/robert_text"
-            android:layout_width="0dp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="2"
-            android:text="@string/actor_robert"
-            android:textColor="@color/actor"
-            app:layout_constraintEnd_toEndOf="@id/robert_image"
-            app:layout_constraintStart_toStartOf="@id/robert_image"
-            app:layout_constraintTop_toBottomOf="@id/robert_image" />
-
-        <TextView
-            android:id="@+id/chris_e_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="2"
-            android:text="@string/actor_chris_e"
-            android:textColor="@color/actor"
-            app:layout_constraintEnd_toEndOf="@id/chris_e_image"
-            app:layout_constraintStart_toStartOf="@id/chris_e_image"
-            app:layout_constraintTop_toTopOf="@id/robert_text" />
-
-        <TextView
-            android:id="@+id/mark_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="2"
-            android:text="@string/actor_mark"
-            android:textColor="@color/actor"
-            app:layout_constraintEnd_toEndOf="@id/mark_image"
-            app:layout_constraintStart_toStartOf="@id/mark_image"
-            app:layout_constraintTop_toTopOf="@id/robert_text" />
-
-        <TextView
-            android:id="@+id/chris_h_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="2"
-            android:text="@string/actor_chris_h"
-            android:textColor="@color/actor"
-            app:layout_constraintEnd_toEndOf="@id/chris_h_image"
-            app:layout_constraintStart_toStartOf="@id/chris_h_image"
-            app:layout_constraintTop_toTopOf="@id/robert_text" />
-
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/cast_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

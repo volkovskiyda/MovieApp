@@ -4,6 +4,7 @@ data class Movie(
     val title: String,
     val duration: String,
     val image: Int,
+    val imageBackground: Int,
     val genre: String,
     val rating: String,
     val storyline: String,
