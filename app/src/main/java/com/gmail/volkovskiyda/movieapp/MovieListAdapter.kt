@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -25,7 +26,8 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Mo
             rating.text = movie.rating
             image.setImageResource(movie.image)
             itemView.setOnClickListener { view ->
-                view.findNavController().navigate(R.id.openMovieDetails)
+                view.findNavController()
+                    .navigate(R.id.openMovieDetails, bundleOf("movie_position" to position))
             }
         }
     }

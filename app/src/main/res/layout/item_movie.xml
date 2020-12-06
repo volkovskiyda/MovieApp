@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:rippleColor="@color/light"
+    app:strokeColor="@color/movie_background"
+    app:strokeWidth="1dp"
     android:layout_marginStart="@dimen/content_padding"
     android:layout_marginTop="24dp"
     android:layout_marginEnd="@dimen/content_padding"
@@ -19,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/movie_avengers"
+            tools:src="@drawable/pic_movie_image_in_list_dolittle"
             app:layout_constraintDimensionRatio=".7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -27,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/avengers_container"
+            android:id="@+id/container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/movie_list_image_gradient"
@@ -176,4 +179,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
