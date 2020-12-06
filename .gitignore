@@ -3,6 +3,4 @@
 .idea
 build
 captures
-.externalNativeBuild
-.cxx
 local.properties
