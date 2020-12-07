@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(MovieDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
@@ -24,10 +26,10 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Mo
             duration.text = movie.duration
             genre.text = movie.genre
             rating.text = movie.rating
-            image.setImageResource(movie.image)
+            image.load(Firebase.storage.getReference(movie.image))
             itemView.setOnClickListener { view ->
                 view.findNavController()
-                    .navigate(R.id.openMovieDetails, bundleOf("movie_position" to position))
+                    .navigate(R.id.openMovieDetails, bundleOf("movie" to movie))
             }
         }
     }

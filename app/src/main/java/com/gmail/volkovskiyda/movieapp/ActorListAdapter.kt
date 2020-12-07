@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class ActorListAdapter : ListAdapter<Actor, ActorListAdapter.ActorViewHolder>(ActorDiffUtil) {
 
@@ -19,7 +21,7 @@ class ActorListAdapter : ListAdapter<Actor, ActorListAdapter.ActorViewHolder>(Ac
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
         val actor = getItem(position)
         with(holder) {
-            image.setImageResource(actor.image)
+            image.load(Firebase.storage.getReference(actor.image))
             name.text = actor.name
         }
     }

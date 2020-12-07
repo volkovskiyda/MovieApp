@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.launch
 
 class MovieListFragment : Fragment() {
 
@@ -18,7 +20,9 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val movieListAdapter = MovieListAdapter()
         view.findViewById<RecyclerView>(R.id.movie_list).adapter = movieListAdapter
-        val movies = DataSource.getMovieList()
-        movieListAdapter.submitList(movies)
+        viewLifecycleOwner.lifecycle.coroutineScope.launch {
+            val movies = DataSource.getMovieList()
+            movieListAdapter.submitList(movies)
+        }
     }
 }

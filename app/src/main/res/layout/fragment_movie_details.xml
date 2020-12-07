@@ -30,7 +30,7 @@
             <ImageView
                 android:id="@+id/background"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/pic_movie_image_in_details_dolittle"
                 app:layout_collapseMode="parallax"
