@@ -1,20 +1,12 @@
 package com.gmail.volkovskiyda.movieapp
 
-import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.flow.Flow
 
 object DataSource {
 
-    suspend fun getMovieList(): List<Movie> = suspendCoroutine { continuation ->
-        Firebase.firestore.collection("movies").addSnapshotListener { value, error ->
-            if (value != null) continuation.resume(value.toObjects())
-            if (error != null) Log.d("getMovieList", error.message, error)
-        }
-    }
+    fun getMovieList(): Flow<List<Movie>> = Firebase.firestore.collection("movies").asFlow()
     /*
     fun getMovieList(): List<Movie> = listOf(
         Movie(

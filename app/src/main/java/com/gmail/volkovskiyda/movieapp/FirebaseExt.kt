@@ -14,7 +14,13 @@ import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.Size
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okio.BufferedSource
 import okio.buffer
@@ -56,4 +62,12 @@ suspend fun <T> Task<T>.await(): T = if (isComplete) when {
             else -> continuation.resume(task.result!!)
         }
     }
+}
+
+@ExperimentalCoroutinesApi
+inline fun <reified T : Any> Query.asFlow(): Flow<List<T>> = callbackFlow {
+    val listener = addSnapshotListener { snapshot, _ ->
+        snapshot?.toObjects<T>()?.let { objects -> offer(objects) }
+    }
+    awaitClose { listener.remove() }
 }
