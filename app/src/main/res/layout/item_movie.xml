@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:rippleColor="@color/light"
-    app:strokeColor="@color/movie_background"
-    app:strokeWidth="1dp"
     android:layout_marginStart="@dimen/content_padding"
     android:layout_marginTop="24dp"
     android:layout_marginEnd="@dimen/content_padding"
     app:cardCornerRadius="8dp"
+    app:rippleColor="@color/light"
+    app:strokeColor="@color/movie_background"
+    app:strokeWidth="1dp"
+    tools:background="@color/background"
     tools:layout_width="160dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,12 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/pic_movie_image_in_list_dolittle"
             app:layout_constraintDimensionRatio=".7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
             android:id="@+id/container"
@@ -49,7 +50,7 @@
             android:textColor="@color/rating"
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toTopOf="@id/image"
-            tools:text="@string/rating_13" />
+            tools:text="13+" />
 
         <ImageView
             android:layout_width="16dp"
@@ -86,7 +87,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
             tools:ignore="SmallSp"
-            tools:text="@string/action_adventure_fantasy" />
+            tools:text="Action, Adventure, Fantasy" />
 
         <ImageView
             android:id="@+id/star_1"
@@ -161,7 +162,7 @@
             app:layout_constraintEnd_toEndOf="@id/image"
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/star_1"
-            tools:text="@string/movie_list_avengers_end_game" />
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/duration"
@@ -175,7 +176,7 @@
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:ignore="SmallSp"
-            tools:text="@string/avengers_duration" />
+            tools:text="126 min" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.firebase.ktx.Firebase
@@ -28,6 +30,9 @@ class MovieDetailsFragment : Fragment() {
         view.findViewById<ImageView>(R.id.background)
             .load(Firebase.storage.getReference(movie.imageBackground))
         view.findViewById<TextView>(R.id.rating).text = movie.rating
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         view.findViewById<TextView>(R.id.genre).text = movie.genre
         view.findViewById<TextView>(R.id.storyline).text = movie.storyline
         view.findViewById<RecyclerView>(R.id.cast).adapter = ActorListAdapter().also { adapter ->
