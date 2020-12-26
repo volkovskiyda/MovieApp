@@ -14,3 +14,4 @@
 [`Ep 04`](https://youtu.be/-k_Rp9KUTeM)
 [`Ep 05`](https://youtu.be/2yGS9cQMmTs)
 [`Ep 06`](https://youtu.be/vIh0dlLpwQw)
+[`Ep 07`](https://youtu.be/EaovJAUrRJE)
