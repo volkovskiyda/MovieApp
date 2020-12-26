@@ -1,4 +1,4 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
