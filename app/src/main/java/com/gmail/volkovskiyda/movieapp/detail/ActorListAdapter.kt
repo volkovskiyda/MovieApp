@@ -1,4 +1,4 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.detail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.load
+import com.gmail.volkovskiyda.movieapp.model.Actor
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 

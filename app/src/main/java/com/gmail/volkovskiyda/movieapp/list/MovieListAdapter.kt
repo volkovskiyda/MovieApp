@@ -1,19 +1,22 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.list
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.load
+import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(MovieDiffUtil) {
+class MovieListAdapter(private val movieListViewModel: MovieListViewModel) :
+    ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(MovieDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
         MovieViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
@@ -28,8 +31,8 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(Mo
             rating.text = movie.rating
             image.load(Firebase.storage.getReference(movie.image))
             itemView.setOnClickListener { view ->
-                view.findNavController()
-                    .navigate(R.id.openMovieDetails, bundleOf("movie" to movie))
+                movieListViewModel.select(movie)
+                view.findNavController().navigate(R.id.openMovieDetails)
             }
         }
     }
