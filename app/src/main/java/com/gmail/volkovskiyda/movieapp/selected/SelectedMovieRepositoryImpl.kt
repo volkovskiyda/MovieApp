@@ -4,8 +4,9 @@ import com.gmail.volkovskiyda.movieapp.model.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import javax.inject.Inject
 
-class SelectedMovieRepositoryImpl : SelectedMovieRepository {
+class SelectedMovieRepositoryImpl @Inject constructor() : SelectedMovieRepository {
 
     private val selected = MutableStateFlow<Movie?>(null)
 

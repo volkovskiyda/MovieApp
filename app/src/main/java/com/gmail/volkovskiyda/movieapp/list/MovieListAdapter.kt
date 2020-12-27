@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +14,12 @@ import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class MovieListAdapter(private val movieListViewModel: MovieListViewModel) :
-    ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(MovieDiffUtil) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
-        MovieViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        )
+class MovieListAdapter(
+    private val movieListViewModel: MovieListViewModel
+) : ListAdapter<Movie, MovieListAdapter.MovieViewHolder>(MovieDiffUtil) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
+    )
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = getItem(position)
@@ -30,10 +29,7 @@ class MovieListAdapter(private val movieListViewModel: MovieListViewModel) :
             genre.text = movie.genre
             rating.text = movie.rating
             image.load(Firebase.storage.getReference(movie.image))
-            itemView.setOnClickListener { view ->
-                movieListViewModel.select(movie)
-                view.findNavController().navigate(R.id.openMovieDetails)
-            }
+            itemView.setOnClickListener { movieListViewModel.select(movie) }
         }
     }
 
