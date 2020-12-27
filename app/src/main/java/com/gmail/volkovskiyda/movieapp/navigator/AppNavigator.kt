@@ -6,8 +6,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 
 interface AppNavigator {
-    fun popBackStack(): Boolean
-    fun popBackStack(@IdRes destinationId: Int, inclusive: Boolean): Boolean
+    fun popBackStack()
+    fun popBackStack(@IdRes destinationId: Int, inclusive: Boolean)
     fun navigate(
         @IdRes resId: Int,
         args: Bundle? = null,

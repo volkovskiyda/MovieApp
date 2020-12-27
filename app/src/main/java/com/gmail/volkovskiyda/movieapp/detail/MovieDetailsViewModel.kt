@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class MovieDetailsViewModel @ViewModelInject constructor(
-    interactor: MovieDetailsInteractor
+    private val interactor: MovieDetailsInteractor
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<Movie?>(null)
@@ -20,5 +20,9 @@ class MovieDetailsViewModel @ViewModelInject constructor(
         interactor.getMovieDetails()
             .onEach { movie -> _state.value = movie }
             .launchIn(viewModelScope)
+    }
+
+    fun popBackStack() {
+        interactor.popBackStack()
     }
 }
