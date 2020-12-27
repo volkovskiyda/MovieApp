@@ -15,3 +15,4 @@
 [`Ep 05`](https://youtu.be/2yGS9cQMmTs)
 [`Ep 06`](https://youtu.be/vIh0dlLpwQw)
 [`Ep 07`](https://youtu.be/EaovJAUrRJE)
+[`Ep 08`](https://youtu.be/wJzyM_y3uwU)
