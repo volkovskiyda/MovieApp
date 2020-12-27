@@ -16,3 +16,4 @@
 [`Ep 06`](https://youtu.be/vIh0dlLpwQw)
 [`Ep 07`](https://youtu.be/EaovJAUrRJE)
 [`Ep 08`](https://youtu.be/wJzyM_y3uwU)
+[`Ep 09`](https://youtu.be/JX7bLYmEeEc)
