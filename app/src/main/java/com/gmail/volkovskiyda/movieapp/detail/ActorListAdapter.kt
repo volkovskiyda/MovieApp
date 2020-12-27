@@ -16,10 +16,9 @@ import com.google.firebase.storage.ktx.storage
 
 class ActorListAdapter : ListAdapter<Actor, ActorListAdapter.ActorViewHolder>(ActorDiffUtil) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorViewHolder =
-        ActorViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_actor, parent, false)
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ActorViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_actor, parent, false)
+    )
 
     override fun onBindViewHolder(holder: ActorViewHolder, position: Int) {
         val actor = getItem(position)

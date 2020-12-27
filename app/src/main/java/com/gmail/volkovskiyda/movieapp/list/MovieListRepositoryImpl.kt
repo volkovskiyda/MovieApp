@@ -5,8 +5,9 @@ import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MovieListRepositoryImpl : MovieListRepository {
+class MovieListRepositoryImpl @Inject constructor() : MovieListRepository {
 
     override fun getMovieList(): Flow<List<Movie>> =
         Firebase.firestore.collection("movies").asFlow()
