@@ -2,7 +2,7 @@
 ##### Movie app
 ##### Environment
 - Windows 10
-- Android Studio 2020.3.1 Canary 3
+- Android Studio 2020.3.1 Canary 4
 - OpenJDK version "11.0.2" 2019-01-15
 - Kotlin version 1.4.21-release-351 (JRE 11.0.2+9)
 - Gradle 6.7.1
@@ -17,3 +17,4 @@
 [`Ep 07`](https://youtu.be/EaovJAUrRJE)
 [`Ep 08`](https://youtu.be/wJzyM_y3uwU)
 [`Ep 09`](https://youtu.be/JX7bLYmEeEc)
+[`Ep 10`](https://youtu.be/B0XpS0pByHM)

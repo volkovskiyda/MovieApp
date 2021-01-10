@@ -1,8 +1,8 @@
 package com.gmail.volkovskiyda.movieapp.list
 
+import com.gmail.volkovskiyda.movieapp.AppNavigator
 import com.gmail.volkovskiyda.movieapp.R
 import com.gmail.volkovskiyda.movieapp.model.Movie
-import com.gmail.volkovskiyda.movieapp.navigator.AppNavigator
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,6 +17,6 @@ class MovieListInteractor @Inject constructor(
 
     fun selectMovie(movie: Movie) {
         selectedMovieRepository.select(movie)
-        appNavigator.navigate(R.id.openMovieDetails)
+        appNavigator.withNavController { navigate(R.id.openMovieDetails) }
     }
 }

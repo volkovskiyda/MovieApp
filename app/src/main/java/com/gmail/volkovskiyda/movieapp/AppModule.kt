@@ -2,8 +2,6 @@ package com.gmail.volkovskiyda.movieapp
 
 import com.gmail.volkovskiyda.movieapp.list.MovieListRepository
 import com.gmail.volkovskiyda.movieapp.list.MovieListRepositoryImpl
-import com.gmail.volkovskiyda.movieapp.navigator.AppNavigator
-import com.gmail.volkovskiyda.movieapp.navigator.AppNavigatorImpl
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepository
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepositoryImpl
 import dagger.Binds
@@ -14,16 +12,12 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-abstract class AppModule {
+interface AppModule {
     @Binds
     @Singleton
-    abstract fun selectedMovieRepository(impl: SelectedMovieRepositoryImpl): SelectedMovieRepository
+    fun selectedMovieRepository(impl: SelectedMovieRepositoryImpl): SelectedMovieRepository
 
     @Binds
     @Singleton
-    abstract fun movieListRepository(impl: MovieListRepositoryImpl): MovieListRepository
-
-    @Binds
-    @Singleton
-    abstract fun appNavigator(impl: AppNavigatorImpl): AppNavigator
+    fun movieListRepository(impl: MovieListRepositoryImpl): MovieListRepository
 }
