@@ -18,3 +18,5 @@
 [`Ep 08`](https://youtu.be/wJzyM_y3uwU)
 [`Ep 09`](https://youtu.be/JX7bLYmEeEc)
 [`Ep 10`](https://youtu.be/B0XpS0pByHM)
+[`Ep 11`](https://youtu.be/kuLJRfP1eLs)
+[`Ep 12`](https://youtu.be/kqDdNeRUWNI)
