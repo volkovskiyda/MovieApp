@@ -140,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@string/reviews_125"
+            tools:text="125 reviews"
             android:textAllCaps="true"
             android:textColor="@color/reviews"
             android:textSize="8sp"

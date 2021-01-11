@@ -8,11 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.gmail.volkovskiyda.movieapp.R
-import com.gmail.volkovskiyda.movieapp.load
 import com.gmail.volkovskiyda.movieapp.model.Movie
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.gmail.volkovskiyda.movieapp.setupReview
 
 class MovieListAdapter(
     private val movieListViewModel: MovieListViewModel
@@ -28,7 +27,9 @@ class MovieListAdapter(
             duration.text = movie.duration
             genre.text = movie.genre
             rating.text = movie.rating
-            image.load(Firebase.storage.getReference(movie.image))
+            image.load(movie.image)
+            setupReview(star1, star2, star3, star4, star5, movie.review)
+            reviews.text = reviews.resources.getString(R.string.reviews, movie.reviewCount)
             itemView.setOnClickListener { movieListViewModel.select(movie) }
         }
     }
@@ -39,6 +40,12 @@ class MovieListAdapter(
         val genre: TextView = itemView.findViewById(R.id.genre)
         val rating: TextView = itemView.findViewById(R.id.rating)
         val image: ImageView = itemView.findViewById(R.id.image)
+        val star1: ImageView = itemView.findViewById(R.id.star_1)
+        val star2: ImageView = itemView.findViewById(R.id.star_2)
+        val star3: ImageView = itemView.findViewById(R.id.star_3)
+        val star4: ImageView = itemView.findViewById(R.id.star_4)
+        val star5: ImageView = itemView.findViewById(R.id.star_5)
+        val reviews: TextView = itemView.findViewById(R.id.reviews)
     }
 
     object MovieDiffUtil : DiffUtil.ItemCallback<Movie>() {

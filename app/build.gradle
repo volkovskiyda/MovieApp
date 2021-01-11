@@ -5,11 +5,12 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlinx-serialization'
 }
 
-def keystorePropertiesFile = project.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def properties = new Properties()
+properties.load(new FileInputStream(project.file("keystore.properties")))
+properties.load(new FileInputStream(project.file("apikey.properties")))
 
 android {
     compileSdkVersion 30
@@ -27,14 +28,14 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['releaseKeyAlias']
-            keyPassword keystoreProperties['releaseKeyPassword']
-            storeFile file(keystoreProperties['releaseKeyStore'])
-            storePassword keystoreProperties['releaseStorePassword']
+            keyAlias properties['releaseKeyAlias']
+            keyPassword properties['releaseKeyPassword']
+            storeFile file(properties['releaseKeyStore'])
+            storePassword properties['releaseStorePassword']
         }
         debug {
-            storeFile file(keystoreProperties['debugKeyStore'])
-            keyAlias keystoreProperties['debugKeyAlias']
+            storeFile file(properties['debugKeyStore'])
+            keyAlias properties['debugKeyAlias']
         }
     }
 
@@ -46,6 +47,7 @@ android {
         }
         debug {
             signingConfig signingConfigs.debug
+            buildConfigField("String", "API_KEY", "\"${properties['apiKey']}\"")
         }
     }
 
@@ -84,6 +86,12 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    def ktor = "1.5.0"
+    implementation "io.ktor:ktor-client-okhttp:$ktor"
+    implementation "io.ktor:ktor-client-serialization-jvm:$ktor"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 
     def hilt = "1.0.0-alpha02"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt"
