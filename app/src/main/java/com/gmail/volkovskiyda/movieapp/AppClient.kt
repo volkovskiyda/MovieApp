@@ -34,23 +34,31 @@ class AppClient @Inject constructor() {
         }
     }
 
-    suspend fun configuration(): ConfigurationResponse = httpClient.get {
-        url("$baseUrl/configuration")
-        parameter(apiKeyParam, API_KEY)
+    suspend fun configuration(): Result<ConfigurationResponse> = runCatching {
+        httpClient.get {
+            url("$baseUrl/configuration")
+            parameter(apiKeyParam, API_KEY)
+        }
     }
 
-    suspend fun genreList(): GenreListResponse = httpClient.get {
-        url("$baseUrl/genre/movie/list")
-        parameter(apiKeyParam, API_KEY)
+    suspend fun genreList(): Result<GenreListResponse> = runCatching {
+        httpClient.get {
+            url("$baseUrl/genre/movie/list")
+            parameter(apiKeyParam, API_KEY)
+        }
     }
 
-    suspend fun popular(): MovieListResponse = httpClient.get {
-        url("$baseUrl/movie/popular")
-        parameter(apiKeyParam, API_KEY)
+    suspend fun popular(): Result<MovieListResponse> = runCatching {
+        httpClient.get {
+            url("$baseUrl/movie/popular")
+            parameter(apiKeyParam, API_KEY)
+        }
     }
 
-    suspend fun movieCredits(id: String): CreditListResponse = httpClient.get {
-        url("$baseUrl/movie/$id/credits")
-        parameter(apiKeyParam, API_KEY)
+    suspend fun movieCredits(id: String): Result<CreditListResponse> = runCatching {
+        httpClient.get {
+            url("$baseUrl/movie/$id/credits")
+            parameter(apiKeyParam, API_KEY)
+        }
     }
 }

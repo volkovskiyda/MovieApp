@@ -56,7 +56,10 @@ android {
         sourceCompatibility javaVersion
         targetCompatibility javaVersion
     }
-    kotlinOptions.jvmTarget = javaVersion.toString()
+    kotlinOptions {
+        jvmTarget = javaVersion.toString()
+        freeCompilerArgs = ["-Xallow-result-return-type"]
+    }
 }
 
 dependencies {

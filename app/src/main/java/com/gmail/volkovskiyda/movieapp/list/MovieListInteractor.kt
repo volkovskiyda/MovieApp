@@ -2,6 +2,7 @@ package com.gmail.volkovskiyda.movieapp.list
 
 import com.gmail.volkovskiyda.movieapp.AppNavigator
 import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.model.Error
 import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +15,8 @@ class MovieListInteractor @Inject constructor(
 ) {
 
     fun getMovieList(): Flow<List<Movie>> = movieListRepository.getMovieList()
+
+    fun observeErrors(): Flow<Error> = movieListRepository.observeErrors()
 
     fun selectMovie(movie: Movie) {
         selectedMovieRepository.select(movie)

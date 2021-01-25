@@ -4,4 +4,6 @@
     <string name="storyline">Storyline</string>
     <string name="cast">Cast</string>
     <string name="movies_list">Movies list</string>
+    <string name="internal_error">Internal error</string>
+    <string name="internal_error_movie_list">Error while fetching movie list</string>
 </resources>
