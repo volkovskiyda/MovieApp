@@ -7,7 +7,7 @@ import com.gmail.volkovskiyda.movieapp.model.Actor
 import com.gmail.volkovskiyda.movieapp.model.Error
 import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
-import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorEntity
+import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieEntity
 import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationResponse
 import kotlinx.coroutines.async
@@ -68,7 +68,7 @@ class MovieListRepositoryImpl @Inject constructor(
             movieDao.insertMovies(movieCast.keys.toList())
             movieDao.insertActors(movieCast.values.flatten().distinctBy { it.id })
             movieDao.insertMovieActors(movieCast.flatMap { (movie, actors) ->
-                actors.map { actor -> MovieActorEntity(movie.id, actor.id) }
+                actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
             })
         }, onFailure = {
             errors.emit(Error.Resource(R.string.internal_error_movie_list))

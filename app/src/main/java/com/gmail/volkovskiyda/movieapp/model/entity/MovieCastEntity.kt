@@ -9,11 +9,8 @@ data class MovieCastEntity(
     @Relation(
         parentColumn = "id",
         entityColumn = "id",
-        entity = ActorEntity::class,
         associateBy = Junction(
-            MovieActorEntity::class,
-            parentColumn = "movieId",
-            entityColumn = "actorId"
+            MovieActorCrossRefEntity::class, parentColumn = "movieId", entityColumn = "actorId"
         )
     )
     val actors: List<ActorEntity>
