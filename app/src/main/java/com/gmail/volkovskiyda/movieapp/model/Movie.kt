@@ -11,7 +11,6 @@ data class Movie(
     val image: String = "",
     val imageBackground: String = "",
     val genre: String = "",
-    val rating: String = "",
     val storyline: String = "",
     val actors: List<Actor> = emptyList(),
     val review: Int,
