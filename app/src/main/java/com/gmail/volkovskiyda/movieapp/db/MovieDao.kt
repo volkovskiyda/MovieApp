@@ -21,4 +21,27 @@ interface MovieDao {
     @Transaction
     @Query("SELECT * FROM movie")
     fun movieCast(): Flow<List<MovieCastEntity>>
+
+    @Query("DELETE FROM movie")
+    suspend fun deleteMovies()
+
+    @Query("DELETE FROM actor")
+    suspend fun deleteActors()
+
+    @Query("DELETE FROM movie_actor")
+    suspend fun deleteMovieActors()
+
+    @Transaction
+    suspend fun replace(
+        movies: List<MovieEntity>,
+        actors: List<ActorEntity>,
+        movieActors: List<MovieActorCrossRefEntity>
+    ) {
+        deleteMovies()
+        deleteActors()
+        deleteMovieActors()
+        insertMovies(movies)
+        insertActors(actors)
+        insertMovieActors(movieActors)
+    }
 }

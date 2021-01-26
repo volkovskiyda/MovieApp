@@ -10,9 +10,7 @@ import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieEntity
 import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationResponse
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.map
@@ -40,7 +38,9 @@ class MovieListRepositoryImpl @Inject constructor(
                 )
             }
         }
-    }.onStart {
+    }.onStart { GlobalScope.launch { populateData() } }
+
+    private suspend fun populateData() {
         initConfig()
         appClient.popular().fold(onSuccess = { listResponse ->
             prepareDetails(listResponse.movies.map { response ->
@@ -65,11 +65,12 @@ class MovieListRepositoryImpl @Inject constructor(
                 }
             }
 
-            movieDao.insertMovies(movieCast.keys.toList())
-            movieDao.insertActors(movieCast.values.flatten().distinctBy { it.id })
-            movieDao.insertMovieActors(movieCast.flatMap { (movie, actors) ->
-                actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
-            })
+            movieDao.replace(
+                movies = movieCast.keys.toList(),
+                actors = movieCast.values.flatten().distinctBy { it.id },
+                movieActors = movieCast.flatMap { (movie, actors) ->
+                    actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
+                })
         }, onFailure = {
             errors.emit(Error.Resource(R.string.internal_error_movie_list))
         })
