@@ -1,11 +1,11 @@
-#### Homework
-##### Movie app
+#### Movie app
 ##### Environment
+
 - Windows 10
-- Android Studio 2020.3.1 Canary 4
+- Android Studio 2020.3.1 Canary 5
 - OpenJDK version "11.0.2" 2019-01-15
 - Kotlin version 1.4.21-release-351 (JRE 11.0.2+9)
-- Gradle 6.7.1
+- Gradle 6.8.1
 
 ###### You can see video cast at [`youtube`](https://www.youtube.com/watch?v=mPKpoz3BTRA&list=PLK7Hkn6sI-e280phjJ0ufKTSt9DDLecPb)
 [`Ep 01`](https://youtu.be/mPKpoz3BTRA)
