@@ -1,0 +1,35 @@
+update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "clean test")
+  end
+
+  desc "Deploy a new Beta Build to the Google Play"
+  lane :beta do
+    release
+    upload_to_play_store(track: 'beta')
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    release
+    upload_to_play_store
+  end
+
+  desc "Deploy a new version to the Firebase App Distribution"
+  lane :distribute do
+      release
+      firebase_app_distribution(
+          app: "1:1093731557476:android:b7e8390b4cba7797b0ff71",
+          testers: "volkovskiyda@gmail.com"
+      )
+  end
+
+  private_lane :release do
+      gradle(task: "clean assembleRelease")
+  end
+end
