@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
-interface AppModule {
+interface RepositoryModule {
     @Binds
     @Singleton
     fun selectedMovieRepository(impl: SelectedMovieRepositoryImpl): SelectedMovieRepository

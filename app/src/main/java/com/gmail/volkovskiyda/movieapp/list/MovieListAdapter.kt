@@ -26,7 +26,6 @@ class MovieListAdapter(
             title.text = movie.title
             duration.text = movie.duration
             genre.text = movie.genre
-            rating.text = movie.rating
             image.load(movie.image)
             setupReview(star1, star2, star3, star4, star5, movie.review)
             reviews.text = reviews.resources.getString(R.string.reviews, movie.reviewCount)
@@ -38,7 +37,6 @@ class MovieListAdapter(
         val title: TextView = itemView.findViewById(R.id.title)
         val duration: TextView = itemView.findViewById(R.id.duration)
         val genre: TextView = itemView.findViewById(R.id.genre)
-        val rating: TextView = itemView.findViewById(R.id.rating)
         val image: ImageView = itemView.findViewById(R.id.image)
         val star1: ImageView = itemView.findViewById(R.id.star_1)
         val star2: ImageView = itemView.findViewById(R.id.star_2)

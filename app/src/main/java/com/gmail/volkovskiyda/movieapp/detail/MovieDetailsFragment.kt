@@ -35,7 +35,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
         val toolbarLayout = view.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
         val background = view.findViewById<ImageView>(R.id.background)
-        val rating = view.findViewById<TextView>(R.id.rating)
         val genre = view.findViewById<TextView>(R.id.genre)
         val star1 = view.findViewById<ImageView>(R.id.star_1)
         val star2 = view.findViewById<ImageView>(R.id.star_2)
@@ -49,7 +48,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         viewModel.state.onEach { movie ->
             toolbarLayout.title = movie.title
             background.load(movie.imageBackground)
-            rating.text = movie.rating
             genre.text = movie.genre
             setupReview(star1, star2, star3, star4, star5, movie.review)
             reviews.text = reviews.resources.getString(R.string.reviews, movie.reviewCount)

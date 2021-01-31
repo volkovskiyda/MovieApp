@@ -1,18 +1,17 @@
-package com.gmail.volkovskiyda.movieapp.model
+package com.gmail.volkovskiyda.movieapp.model.entity
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Parcelize
-data class Movie(
-    val id: String = "",
+@Entity(tableName = "movie")
+data class MovieEntity(
+    @PrimaryKey val id: String = "",
     val title: String = "",
     val duration: String = "",
     val image: String = "",
     val imageBackground: String = "",
     val genre: String = "",
     val storyline: String = "",
-    val actors: List<Actor> = emptyList(),
     val review: Int,
     val reviewCount: Int,
-) : Parcelable
+)
