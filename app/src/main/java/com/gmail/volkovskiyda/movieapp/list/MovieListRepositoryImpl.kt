@@ -2,51 +2,88 @@ package com.gmail.volkovskiyda.movieapp.list
 
 import com.gmail.volkovskiyda.movieapp.AppClient
 import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.db.MovieDao
 import com.gmail.volkovskiyda.movieapp.model.Actor
 import com.gmail.volkovskiyda.movieapp.model.Error
 import com.gmail.volkovskiyda.movieapp.model.Movie
+import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
+import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity
+import com.gmail.volkovskiyda.movieapp.model.entity.MovieEntity
 import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationResponse
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class MovieListRepositoryImpl @Inject constructor(
-    private val appClient: AppClient
+    private val appClient: AppClient,
+    private val movieDao: MovieDao
 ) : MovieListRepository {
 
     private lateinit var configuration: ConfigurationResponse
     private lateinit var genre: Map<Int, String>
     private val movieCreditStates = mutableListOf<MovieStatus>()
-    private val movies = MutableStateFlow<List<Movie>>(emptyList())
     private val errors = MutableSharedFlow<Error>()
 
-    override fun getMovieList(): Flow<List<Movie>> = movies.onStart {
-        initConfig()
-        appClient.popular().fold(onSuccess = { listResponse ->
-            movies.value = listResponse.movies.map { response ->
+    override fun getMovieList(): Flow<List<Movie>> = movieDao.movieCast().map { list ->
+        list.map { entity ->
+            with(entity.movie) {
                 Movie(
-                    id = response.id.toString(),
-                    title = response.title,
-                    duration = "",
-                    image = image(response.posterPath),
-                    imageBackground = imageBackground(response.backdropPath),
-                    genre = response.genreIds.map { id ->
-                        genre[id]
-                    }.joinToString(limit = 3, truncated = ""),
-                    rating = "PG",
-                    storyline = response.overview,
-                    actors = emptyList(),
-                    review = (response.voteAverage / 2).roundToInt(),
-                    reviewCount = response.voteCount,
+                    id = id,
+                    title = title,
+                    duration = duration,
+                    image = image,
+                    imageBackground = imageBackground,
+                    genre = genre,
+                    storyline = storyline,
+                    actors = entity.actors.map { entity ->
+                        with(entity) { Actor(id, name, image) }
+                    },
+                    review = review,
+                    reviewCount = reviewCount
                 )
             }
-            prepareDetails()
+        }
+    }.onStart { GlobalScope.launch { populateData() } }
+
+    private suspend fun populateData() {
+        initConfig()
+        appClient.popular().fold(onSuccess = { listResponse ->
+            prepareDetails(
+                listResponse.movies.map { response ->
+                    MovieEntity(
+                        id = response.id.toString(),
+                        title = response.title,
+                        duration = "",
+                        image = image(response.posterPath),
+                        imageBackground = imageBackground(response.backdropPath),
+                        genre = response.genreIds.map { id ->
+                            genre[id]
+                        }.joinToString(limit = 3, truncated = ""),
+                        storyline = response.overview,
+                        review = (response.voteAverage / 2).roundToInt(),
+                        reviewCount = response.voteCount,
+                    )
+                }
+            )
+
+            val movieCast = movieCreditStates.associate { state ->
+                when (state) {
+                    is MovieStatus.Ready -> state.movie to state.actors
+                    else -> state.movie to emptyList()
+                }
+            }
+
+            movieDao.replace(
+                movies = movieCast.keys.toList(),
+                actors = movieCast.values.flatten().distinctBy { it.id },
+                movieActors = movieCast.flatMap { (movie, actors) ->
+                    actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
+                }
+            )
         }, onFailure = {
             errors.emit(Error.Resource(R.string.internal_error_movie_list))
         })
@@ -54,8 +91,7 @@ class MovieListRepositoryImpl @Inject constructor(
 
     override fun observeErrors(): Flow<Error> = errors
 
-    private suspend fun prepareDetails() {
-        val movies = movies.value
+    private suspend fun prepareDetails(movies: List<MovieEntity>) {
         movieCreditStates.clear()
         movieCreditStates.addAll(movies.map { MovieStatus.Init(it) })
 
@@ -84,28 +120,26 @@ class MovieListRepositoryImpl @Inject constructor(
         val ready = loading.map { it.movie }.map { MovieStatus.Ready(it, credits[it].orEmpty()) }
         movieCreditStates.removeAll(loading)
         movieCreditStates.addAll(indexToInsert, ready)
-        movies.value = movieCreditStates.map { state ->
-            when (state) {
-                is MovieStatus.Ready -> state.movie.copy(actors = state.cast)
-                else -> state.movie
-            }
-        }
 
         requestDetails()
     }
 
-    private suspend fun credits(movieId: String): List<Actor> =
+    private suspend fun credits(movieId: String): List<ActorEntity> =
         appClient.movieCredits(movieId).getOrNull()?.cast.orEmpty().mapNotNull { response ->
-            response.profilePath?.let { image -> Actor(response.name, profile(image)) }
+            response.profilePath?.let { image ->
+                ActorEntity(
+                    response.id.toString(),
+                    response.name,
+                    profile(image)
+                )
+            }
         }
 
     private suspend fun initConfig() {
         if (::configuration.isInitialized.not()) {
             appClient.configuration().fold(onSuccess = { response ->
                 configuration = response
-            }, onFailure = {
-                errors.emit(Error.Resource(R.string.internal_error))
-            })
+            }, onFailure = {})
         }
         if (::genre.isInitialized.not()) genre =
             appClient.genreList().getOrNull()?.genres.orEmpty().associate { it.id to it.name }
@@ -122,9 +156,11 @@ class MovieListRepositoryImpl @Inject constructor(
 
     private fun last(list: List<String>) = list.dropLast(1).last()
 
-    private sealed class MovieStatus(open val movie: Movie) {
-        class Init(movie: Movie) : MovieStatus(movie)
-        class Loading(movie: Movie) : MovieStatus(movie)
-        data class Ready(override val movie: Movie, val cast: List<Actor>) : MovieStatus(movie)
+    private sealed class MovieStatus(open val movie: MovieEntity) {
+        class Init(movie: MovieEntity) : MovieStatus(movie)
+        class Loading(movie: MovieEntity) : MovieStatus(movie)
+        data class Ready(
+            override val movie: MovieEntity, val actors: List<ActorEntity>
+        ) : MovieStatus(movie)
     }
 }

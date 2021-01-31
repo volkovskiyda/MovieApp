@@ -13,7 +13,6 @@
     <color name="red">#FFFF3466</color>
 
     <color name="background">#FF191926</color>
-    <color name="rating">@color/white</color>
     <color name="title">@color/light</color>
     <color name="genre">@color/red</color>
     <color name="reviews">@color/dark</color>

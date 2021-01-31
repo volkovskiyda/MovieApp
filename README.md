@@ -21,3 +21,4 @@
 [`Ep 11`](https://youtu.be/kuLJRfP1eLs)
 [`Ep 12`](https://youtu.be/kqDdNeRUWNI)
 [`Ep 13`](https://youtu.be/2kK-MppN3Rk)
+[`Ep 14`](https://youtu.be/RGEk7k8mSVM)
