@@ -10,3 +10,4 @@ fastlane/*
 !fastlane/Appfile
 !fastlane/Fastfile
 !fastlane/Pluginfile
+!fastlane/README.md

@@ -8,6 +8,12 @@ platform :android do
     gradle(task: "clean test")
   end
 
+  desc "Deploy a new Internal Build to the Google Play"
+    lane :internal do
+      release
+      upload_to_play_store(track: 'internal')
+    end
+
   desc "Deploy a new Beta Build to the Google Play"
   lane :beta do
     release
@@ -22,7 +28,7 @@ platform :android do
 
   desc "Deploy a new version to the Firebase App Distribution"
   lane :distribute do
-      release
+      gradle(task: "clean assembleRelease")
       firebase_app_distribution(
           app: "1:1093731557476:android:b7e8390b4cba7797b0ff71",
           testers: "volkovskiyda@gmail.com"
@@ -30,6 +36,6 @@ platform :android do
   end
 
   private_lane :release do
-      gradle(task: "clean assembleRelease")
+      gradle(task: "clean bundleRelease")
   end
 end
