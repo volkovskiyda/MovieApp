@@ -97,10 +97,6 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 
-    def hilt = "1.0.0-alpha02"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt"
-    kapt "androidx.hilt:hilt-compiler:$hilt"
-
     def room = "2.2.6"
     implementation "androidx.room:room-runtime:$room"
     implementation "androidx.room:room-ktx:$room"
