@@ -70,11 +70,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
-    def navigation = "2.3.2"
+    def navigation = "2.3.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
-    implementation "io.coil-kt:coil:1.1.0"
+    implementation "io.coil-kt:coil:1.1.1"
 
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation "com.google.firebase:firebase-firestore-ktx"
@@ -91,7 +91,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    def ktor = "1.5.0"
+    def ktor = "1.5.1"
     implementation "io.ktor:ktor-client-okhttp:$ktor"
     implementation "io.ktor:ktor-client-serialization-jvm:$ktor"
 
