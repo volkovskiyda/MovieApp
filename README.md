@@ -23,3 +23,4 @@
 [`Ep 13`](https://youtu.be/2kK-MppN3Rk)
 [`Ep 14`](https://youtu.be/RGEk7k8mSVM)
 [`Ep 15`](https://youtu.be/B8aimnUUX40)
+[`Ep 16`](https://youtu.be/YV-5-Ecdg4M)

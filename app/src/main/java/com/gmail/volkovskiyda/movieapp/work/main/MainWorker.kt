@@ -1,9 +1,10 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.work.main
 
 import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.gmail.volkovskiyda.movieapp.app.AppClient
 import com.gmail.volkovskiyda.movieapp.db.MovieDao
 import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity

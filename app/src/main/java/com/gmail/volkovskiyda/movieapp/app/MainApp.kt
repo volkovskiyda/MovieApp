@@ -1,4 +1,4 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.app
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
