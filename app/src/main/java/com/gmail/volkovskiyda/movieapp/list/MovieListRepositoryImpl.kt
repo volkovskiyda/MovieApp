@@ -1,22 +1,22 @@
 package com.gmail.volkovskiyda.movieapp.list
 
-import androidx.work.*
-import com.gmail.volkovskiyda.movieapp.MainWorker
+import androidx.work.ExistingPeriodicWorkPolicy.KEEP
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.gmail.volkovskiyda.movieapp.db.MovieDao
 import com.gmail.volkovskiyda.movieapp.model.Actor
 import com.gmail.volkovskiyda.movieapp.model.Movie
+import com.gmail.volkovskiyda.movieapp.work.main.MainPeriodicWorkRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MovieListRepositoryImpl @Inject constructor(
     private val movieDao: MovieDao,
     private val workManager: WorkManager,
+    @MainPeriodicWorkRequest private val workRequest: PeriodicWorkRequest,
 ) : MovieListRepository {
-
-
 
     override fun getMovieList(): Flow<List<Movie>> = movieDao.movieCast().map { list ->
         list.map { entity ->
@@ -38,16 +38,6 @@ class MovieListRepositoryImpl @Inject constructor(
             }
         }
     }.onStart {
-        workManager.enqueueUniquePeriodicWork(
-            "populateData",
-            ExistingPeriodicWorkPolicy.KEEP,
-            PeriodicWorkRequestBuilder<MainWorker>(6, TimeUnit.HOURS)
-                .setConstraints(
-                    Constraints.Builder()
-                        .setRequiredNetworkType(NetworkType.CONNECTED)
-                        .build()
-                )
-                .build()
-        )
+        workManager.enqueueUniquePeriodicWork("populateData", KEEP, workRequest)
     }
 }

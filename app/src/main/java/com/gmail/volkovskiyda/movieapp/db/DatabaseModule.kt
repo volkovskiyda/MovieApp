@@ -1,9 +1,7 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.db
 
 import android.content.Context
 import androidx.room.Room
-import com.gmail.volkovskiyda.movieapp.db.MovieDao
-import com.gmail.volkovskiyda.movieapp.db.MovieDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

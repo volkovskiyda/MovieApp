@@ -1,4 +1,4 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.app
 
 import com.gmail.volkovskiyda.movieapp.BuildConfig.API_KEY
 import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationResponse

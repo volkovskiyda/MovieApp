@@ -1,4 +1,4 @@
-package com.gmail.volkovskiyda.movieapp
+package com.gmail.volkovskiyda.movieapp.app
 
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,7 +1,7 @@
 package com.gmail.volkovskiyda.movieapp.list
 
-import com.gmail.volkovskiyda.movieapp.AppNavigator
 import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.app.AppNavigator
 import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepository
 import kotlinx.coroutines.flow.Flow
