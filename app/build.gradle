@@ -49,6 +49,7 @@ android {
             buildConfigField("String", "API_KEY", "\"${properties['apiKey']}\"")
         }
         debug {
+            applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
             buildConfigField("String", "API_KEY", "\"${properties['apiKey']}\"")
         }

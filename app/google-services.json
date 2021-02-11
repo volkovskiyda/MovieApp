@@ -49,6 +49,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093731557476:android:d4cc04a259d1799db0ff71",
+        "android_client_info": {
+          "package_name": "com.gmail.volkovskiyda.movieapp.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093731557476-uq9i1s0kufu1av3o43g2kiugobbggs0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.volkovskiyda.movieapp.debug",
+            "certificate_hash": "25e9549ff4ba2c852c83636b294bab26af940ee5"
+          }
+        },
+        {
+          "client_id": "1093731557476-1mougqcmloi2td0k4hnv719ct5369uj7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgJrQCvsPixHCh2cC56OGPOiQVTw2AwaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093731557476-1mougqcmloi2td0k4hnv719ct5369uj7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
