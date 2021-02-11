@@ -3,5 +3,4 @@
     <string name="reviews">%d reviews</string>
     <string name="storyline">Storyline</string>
     <string name="cast">Cast</string>
-    <string name="movies_list">@string/app_name</string>
 </resources>
