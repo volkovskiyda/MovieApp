@@ -9,10 +9,10 @@ platform :android do
   end
 
   desc "Deploy a new Internal Build to the Google Play"
-    lane :internal do
-      release
-      upload_to_play_store(track: 'internal')
-    end
+  lane :internal do
+    release
+    upload_to_play_store(track: 'internal')
+  end
 
   desc "Deploy a new Beta Build to the Google Play"
   lane :beta do
