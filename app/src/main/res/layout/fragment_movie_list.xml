@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <TextView
-        android:id="@+id/screen_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/content_padding"
-        android:layout_marginTop="@dimen/content_padding"
-        android:drawablePadding="8dp"
-        android:text="@string/movies_list"
-        android:textColor="@color/title"
-        app:drawableStartCompat="@drawable/ic_crosshair"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,12 +23,18 @@
         android:clipToPadding="false"
         android:paddingBottom="@dimen/content_padding"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/content_padding"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/screen_title"
+        app:layout_constraintTop_toBottomOf="@id/icon"
         app:spanCount="@integer/spanCount"
         tools:itemCount="4"
         tools:listitem="@layout/item_movie" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".8"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
