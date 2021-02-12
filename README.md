@@ -2,7 +2,7 @@
 ##### Environment
 
 - Windows 10
-- Android Studio 2020.3.1 Canary 5
+- Android Studio 2020.3.1 Canary 6
 - OpenJDK version "11.0.2" 2019-01-15
 - Kotlin version 1.4.21-release-351 (JRE 11.0.2+9)
 - Gradle 6.8.1
