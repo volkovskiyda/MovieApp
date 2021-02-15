@@ -1,6 +1,7 @@
 package com.gmail.volkovskiyda.movieapp.app
 
 import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -31,7 +32,7 @@ class AppNotification @Inject constructor(
                 NotificationChannel(
                     movieChannelId,
                     context.getString(R.string.app_name),
-                    NotificationManagerCompat.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_DEFAULT
                 )
             )
         }
