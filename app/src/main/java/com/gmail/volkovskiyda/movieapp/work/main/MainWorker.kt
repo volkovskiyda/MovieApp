@@ -5,7 +5,10 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.gmail.volkovskiyda.movieapp.app.AppClient
+import com.gmail.volkovskiyda.movieapp.app.AppNotification
 import com.gmail.volkovskiyda.movieapp.db.MovieDao
+import com.gmail.volkovskiyda.movieapp.model.Actor
+import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieEntity
@@ -15,6 +18,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
 import kotlin.math.roundToInt
 
 @HiltWorker
@@ -23,6 +27,7 @@ class MainWorker @AssistedInject constructor(
     @Assisted workerParameters: WorkerParameters,
     private val appClient: AppClient,
     private val movieDao: MovieDao,
+    private val notification: AppNotification,
 ) : CoroutineWorker(context, workerParameters) {
 
     private lateinit var configuration: ConfigurationResponse
@@ -69,6 +74,24 @@ class MainWorker @AssistedInject constructor(
                     actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
                 }
             )
+            movieDao.movieCast().first().firstOrNull()?.let { entity ->
+                with(entity.movie) {
+                    Movie(
+                        id = id,
+                        title = title,
+                        duration = duration,
+                        image = image,
+                        imageBackground = imageBackground,
+                        genre = genre,
+                        storyline = storyline,
+                        actors = entity.actors.map { entity ->
+                            with(entity) { Actor(id, name, image) }
+                        },
+                        review = review,
+                        reviewCount = reviewCount
+                    )
+                }
+            }?.run { notification.showMovieNotification(this) }
         }, onFailure = {})
     }
 

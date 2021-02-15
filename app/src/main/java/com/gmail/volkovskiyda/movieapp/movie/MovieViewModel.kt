@@ -2,6 +2,7 @@ package com.gmail.volkovskiyda.movieapp.movie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gmail.volkovskiyda.movieapp.app.AppNotification
 import com.gmail.volkovskiyda.movieapp.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val interactor: MovieInteractor
+    private val interactor: MovieInteractor,
+    private val notification: AppNotification,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<State>(State.Loading)
@@ -20,7 +22,9 @@ class MovieViewModel @Inject constructor(
     fun setMovieId(movieId: String) {
         viewModelScope.launch {
             _state.value = State.Loading
-            _state.value = interactor.loadMovie(movieId)?.let(State::Show) ?: State.NotFound
+            _state.value = interactor.loadMovie(movieId)?.let(State::Show)?.also { state ->
+                notification.dismissMovieNotification(state.movie.id)
+            } ?: State.NotFound
         }
     }
 
