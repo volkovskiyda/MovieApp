@@ -5,16 +5,23 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.gmail.volkovskiyda.movieapp.app.AppClient
+import com.gmail.volkovskiyda.movieapp.app.AppNotification
 import com.gmail.volkovskiyda.movieapp.db.MovieDao
+import com.gmail.volkovskiyda.movieapp.image
+import com.gmail.volkovskiyda.movieapp.imageBackground
+import com.gmail.volkovskiyda.movieapp.model.Actor
+import com.gmail.volkovskiyda.movieapp.model.Movie
 import com.gmail.volkovskiyda.movieapp.model.entity.ActorEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieActorCrossRefEntity
 import com.gmail.volkovskiyda.movieapp.model.entity.MovieEntity
 import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationResponse
+import com.gmail.volkovskiyda.movieapp.profile
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
 import kotlin.math.roundToInt
 
 @HiltWorker
@@ -23,6 +30,7 @@ class MainWorker @AssistedInject constructor(
     @Assisted workerParameters: WorkerParameters,
     private val appClient: AppClient,
     private val movieDao: MovieDao,
+    private val notification: AppNotification,
 ) : CoroutineWorker(context, workerParameters) {
 
     private lateinit var configuration: ConfigurationResponse
@@ -43,8 +51,8 @@ class MainWorker @AssistedInject constructor(
                         id = response.id.toString(),
                         title = response.title,
                         duration = "",
-                        image = image(response.posterPath),
-                        imageBackground = imageBackground(response.backdropPath),
+                        image = configuration.image(response.posterPath),
+                        imageBackground = configuration.imageBackground(response.backdropPath),
                         genre = response.genreIds.map { id ->
                             genre[id]
                         }.joinToString(limit = 3, truncated = ""),
@@ -69,6 +77,24 @@ class MainWorker @AssistedInject constructor(
                     actors.map { actor -> MovieActorCrossRefEntity(movie.id, actor.id) }
                 }
             )
+            movieDao.movieCast().first().firstOrNull()?.let { entity ->
+                with(entity.movie) {
+                    Movie(
+                        id = id,
+                        title = title,
+                        duration = duration,
+                        image = image,
+                        imageBackground = imageBackground,
+                        genre = genre,
+                        storyline = storyline,
+                        actors = entity.actors.map { entity ->
+                            with(entity) { Actor(id, name, image) }
+                        },
+                        review = review,
+                        reviewCount = reviewCount
+                    )
+                }
+            }?.run { notification.showMovieNotification(this) }
         }, onFailure = {})
     }
 
@@ -111,7 +137,7 @@ class MainWorker @AssistedInject constructor(
                 ActorEntity(
                     response.id.toString(),
                     response.name,
-                    profile(image)
+                    configuration.profile(image)
                 )
             }
         }
@@ -125,17 +151,6 @@ class MainWorker @AssistedInject constructor(
         if (::genre.isInitialized.not()) genre =
             appClient.genreList().getOrNull()?.genres.orEmpty().associate { it.id to it.name }
     }
-
-    private fun image(path: String): String =
-        "${configuration.images.secureBaseUrl}${last(configuration.images.posterSizes)}$path"
-
-    private fun imageBackground(path: String): String =
-        "${configuration.images.secureBaseUrl}${last(configuration.images.backdropSizes)}$path"
-
-    private fun profile(path: String): String =
-        "${configuration.images.secureBaseUrl}${last(configuration.images.profileSizes)}$path"
-
-    private fun last(list: List<String>) = list.dropLast(1).last()
 
     private sealed class MovieStatus(open val movie: MovieEntity) {
         class Init(movie: MovieEntity) : MovieStatus(movie)

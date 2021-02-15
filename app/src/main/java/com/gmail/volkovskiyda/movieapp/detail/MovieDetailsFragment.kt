@@ -5,13 +5,16 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.gmail.volkovskiyda.movieapp.R
+import com.gmail.volkovskiyda.movieapp.model.MovieStatus
 import com.gmail.volkovskiyda.movieapp.setupReview
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +36,11 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         val adapter = ActorListAdapter()
         view.findViewById<RecyclerView>(R.id.cast).adapter = adapter
 
+        val contentScroll = view.findViewById<NestedScrollView>(R.id.content_scroll)
+        val content = view.findViewById<View>(R.id.content)
+        val loading = view.findViewById<View>(R.id.loading)
+        val error = view.findViewById<View>(R.id.error)
+
         val toolbarLayout = view.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
         val background = view.findViewById<ImageView>(R.id.background)
         val genre = view.findViewById<TextView>(R.id.genre)
@@ -45,15 +53,24 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         val storyline = view.findViewById<TextView>(R.id.storyline)
         val cast = view.findViewById<TextView>(R.id.cast_title)
 
-        viewModel.state.onEach { movie ->
-            toolbarLayout.title = movie.title
-            background.load(movie.imageBackground)
-            genre.text = movie.genre
-            setupReview(star1, star2, star3, star4, star5, movie.review)
-            reviews.text = reviews.resources.getString(R.string.reviews, movie.reviewCount)
-            storyline.text = movie.storyline
-            cast.isVisible = movie.actors.isNotEmpty()
-            adapter.submitList(movie.actors)
+        viewModel.state.onEach { movieStatus ->
+            loading.isInvisible = movieStatus !is MovieStatus.Loading
+            error.isInvisible = movieStatus !is MovieStatus.NotFound
+            content.isInvisible = movieStatus !is MovieStatus.Selected
+            contentScroll.isNestedScrollingEnabled = movieStatus is MovieStatus.Selected
+
+            if (movieStatus is MovieStatus.Selected) {
+                val movie = movieStatus.movie
+
+                toolbarLayout.title = movie.title
+                background.load(movie.imageBackground)
+                genre.text = movie.genre
+                setupReview(star1, star2, star3, star4, star5, movie.review)
+                reviews.text = reviews.resources.getString(R.string.reviews, movie.reviewCount)
+                storyline.text = movie.storyline
+                cast.isVisible = movie.actors.isNotEmpty()
+                adapter.submitList(movie.actors)
+            }
         }.launchIn(viewLifecycleOwner.lifecycle.coroutineScope)
     }
 }

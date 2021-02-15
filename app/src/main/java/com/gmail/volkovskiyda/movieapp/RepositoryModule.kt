@@ -1,5 +1,7 @@
 package com.gmail.volkovskiyda.movieapp
 
+import com.gmail.volkovskiyda.movieapp.fetch.FetchMovieRepository
+import com.gmail.volkovskiyda.movieapp.fetch.FetchMovieRepositoryImpl
 import com.gmail.volkovskiyda.movieapp.list.MovieListRepository
 import com.gmail.volkovskiyda.movieapp.list.MovieListRepositoryImpl
 import com.gmail.volkovskiyda.movieapp.selected.SelectedMovieRepository
@@ -20,4 +22,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun movieListRepository(impl: MovieListRepositoryImpl): MovieListRepository
+
+    @Binds
+    @Singleton
+    fun fetchMovieRepository(impl: FetchMovieRepositoryImpl): FetchMovieRepository
 }

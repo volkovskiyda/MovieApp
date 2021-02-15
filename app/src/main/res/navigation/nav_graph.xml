@@ -9,15 +9,16 @@
         android:id="@+id/movieListFragment"
         android:name="com.gmail.volkovskiyda.movieapp.list.MovieListFragment"
         android:label="MovieListFragment"
-        tools:layout="@layout/fragment_movie_list">
-        <action
-            android:id="@+id/openMovieDetails"
-            app:destination="@id/MovieDetailsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_movie_list" />
 
     <fragment
-        android:id="@+id/MovieDetailsFragment"
+        android:id="@+id/movieDetailsFragment"
         android:name="com.gmail.volkovskiyda.movieapp.detail.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
         tools:layout="@layout/fragment_movie_details" />
+
+    <action
+        android:id="@+id/openMovieDetails"
+        app:destination="@id/movieDetailsFragment"
+        app:launchSingleTop="true" />
 </navigation>
