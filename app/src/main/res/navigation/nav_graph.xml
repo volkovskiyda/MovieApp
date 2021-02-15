@@ -12,12 +12,31 @@
         tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/openMovieDetails"
-            app:destination="@id/MovieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/MovieDetailsFragment"
+        android:id="@+id/movieDetailsFragment"
         android:name="com.gmail.volkovskiyda.movieapp.detail.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
         tools:layout="@layout/fragment_movie_details" />
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.gmail.volkovskiyda.movieapp.movie.MovieFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_movie">
+        <argument
+            android:name="movieId"
+            app:argType="string" />
+        <action
+            android:id="@+id/openMovieDetails"
+            app:destination="@id/movieDetailsFragment"
+            app:popUpTo="@id/movieFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/openMovie"
+        app:destination="@id/movieFragment" />
 </navigation>

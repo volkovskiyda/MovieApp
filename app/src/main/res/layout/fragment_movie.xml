@@ -8,4 +8,6 @@
 
     <include layout="@layout/content_movie" />
 
+    <include layout="@layout/loading_error" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

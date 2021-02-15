@@ -5,6 +5,7 @@ import com.gmail.volkovskiyda.movieapp.model.response.config.ConfigurationRespon
 import com.gmail.volkovskiyda.movieapp.model.response.credit.CreditListResponse
 import com.gmail.volkovskiyda.movieapp.model.response.genre.GenreListResponse
 import com.gmail.volkovskiyda.movieapp.model.response.movie.MovieListResponse
+import com.gmail.volkovskiyda.movieapp.model.response.movie.details.MovieDetailsResponse
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.json.JsonFeature
@@ -58,6 +59,13 @@ class AppClient @Inject constructor() {
     suspend fun movieCredits(id: String): Result<CreditListResponse> = runCatching {
         httpClient.get {
             url("$baseUrl/movie/$id/credits")
+            parameter(apiKeyParam, API_KEY)
+        }
+    }
+
+    suspend fun movie(id: String): Result<MovieDetailsResponse> = runCatching {
+        httpClient.get {
+            url("$baseUrl/movie/$id")
             parameter(apiKeyParam, API_KEY)
         }
     }
