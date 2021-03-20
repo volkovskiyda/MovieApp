@@ -11,6 +11,10 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.7.2'
+    - name: Service account
+      env:
+        serviceAccount: ${{ secrets.SERVICE_ACCOUNT }}
+      run: echo $serviceAccount > movieapp-752e6-140f35f3f1ff.json
     - uses: maierj/fastlane-action@v2.0.1
       env:
         releaseStorePassword: ${{ secrets.RELEASE_STORE_PASSWORD }}
