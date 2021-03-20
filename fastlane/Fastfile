@@ -39,6 +39,7 @@ platform :android do
       )
       firebase_app_distribution(
           app: "1:1093731557476:android:b7e8390b4cba7797b0ff71",
+          service_credentials_file: "movieapp-752e6-cd5df09c6569.json",
           testers: "volkovskiyda@gmail.com"
       )
   end
