@@ -30,10 +30,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias properties['releaseKeyAlias']
-            keyPassword properties['releaseKeyPassword']
             storeFile file(properties['releaseKeyStore'])
-            storePassword properties['releaseStorePassword']
+            storePassword project.hasProperty('releaseStorePassword') ? project.properties['releaseStorePassword'] : properties['releaseStorePassword']
+            keyAlias project.hasProperty('releaseKeyAlias') ? project.properties['releaseKeyAlias'] : properties['releaseKeyAlias']
+            keyPassword project.hasProperty('releaseKeyPassword') ? project.properties['releaseKeyPassword'] : properties['releaseKeyPassword']
         }
         debug {
             storeFile file(properties['debugKeyStore'])
@@ -41,17 +41,18 @@ android {
         }
     }
 
+    def apiKey = project.hasProperty('apiKey') ? project.properties['apiKey'] : properties['apiKey']
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            buildConfigField("String", "API_KEY", "\"${properties['apiKey']}\"")
+            buildConfigField("String", "API_KEY", "\"$apiKey\"")
         }
         debug {
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
-            buildConfigField("String", "API_KEY", "\"${properties['apiKey']}\"")
+            buildConfigField("String", "API_KEY", "\"$apiKey\"")
         }
     }
 

@@ -4,6 +4,7 @@
 build
 captures
 release
+.env
 local.properties
 movieapp-752e6-140f35f3f1ff.json
 fastlane/*

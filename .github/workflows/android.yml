@@ -12,5 +12,10 @@ jobs:
       with:
         ruby-version: '2.7.2'
     - uses: maierj/fastlane-action@v2.0.1
+      env:
+        releaseStorePassword: ${{ secrets.RELEASE_STORE_PASSWORD }}
+        releaseKeyAlias: ${{ secrets.RELEASE_KEY_ALIAS }}
+        releaseKeyPassword: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        apiKey: ${{ secrets.API_KEY }}
       with:
         lane: 'distribute'
