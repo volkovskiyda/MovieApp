@@ -73,24 +73,24 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
-    def navigation = "2.3.3"
+    def navigation = "2.3.4"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
     implementation "io.coil-kt:coil:1.1.1"
 
-    implementation platform('com.google.firebase:firebase-bom:26.4.0')
+    implementation platform("com.google.firebase:firebase-bom:26.4.0")
     implementation "com.google.firebase:firebase-firestore-ktx"
     implementation "com.google.firebase:firebase-storage-ktx"
     implementation "com.google.firebase:firebase-perf-ktx"
     implementation "com.google.firebase:firebase-crashlytics-ktx"
     implementation "com.google.firebase:firebase-analytics-ktx"
 
-    def lifecycle = "2.2.0"
+    def lifecycle = "2.3.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
 
-    testImplementation "junit:junit:4.13.1"
+    testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.2"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
 
@@ -101,7 +101,7 @@ dependencies {
     implementation "io.ktor:ktor-client-okhttp:$ktor"
     implementation "io.ktor:ktor-client-serialization-jvm:$ktor"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
 
     def room = "2.2.6"
     implementation "androidx.room:room-runtime:$room"
@@ -110,7 +110,7 @@ dependencies {
 
     implementation "androidx.work:work-runtime-ktx:2.5.0"
 
-    def hilt = "1.0.0-alpha03"
+    def hilt = "1.0.0-beta01"
     implementation "androidx.hilt:hilt-work:$hilt"
     kapt "androidx.hilt:hilt-compiler:$hilt"
 }
