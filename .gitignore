@@ -6,7 +6,7 @@ captures
 release
 .env
 local.properties
-movieapp-752e6-cd5df09c6569.json
+movieapp-service-account.json
 fastlane/*
 !fastlane/Appfile
 !fastlane/Fastfile

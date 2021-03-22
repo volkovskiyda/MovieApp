@@ -26,16 +26,6 @@ Runs all the tests
 fastlane android internal
 ```
 Deploy a new Internal Build to the Google Play
-### android beta
-```
-fastlane android beta
-```
-Deploy a new Beta Build to the Google Play
-### android deploy
-```
-fastlane android deploy
-```
-Deploy a new version to the Google Play
 ### android distribute
 ```
 fastlane android distribute

@@ -14,22 +14,23 @@ platform :android do
     upload_to_play_store(track: 'internal')
   end
 
-  desc "Deploy a new Beta Build to the Google Play"
-  lane :beta do
-    release
-    upload_to_play_store(track: 'beta')
-  end
-
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    release
-    upload_to_play_store
-  end
-
   desc "Deploy a new version to the Firebase App Distribution"
   lane :distribute do
+      release(assemble: true)
+      firebase_app_distribution(
+          app: "1:1093731557476:android:b7e8390b4cba7797b0ff71",
+          service_credentials_file: CredentialsManager::AppfileConfig.try_fetch_value(:json_key_file),
+          testers: "volkovskiyda@gmail.com"
+      )
+  end
+
+  private_lane :release do |options|
+      gradle(task: "clean")
+      releaseTask = (options[:assemble] ? "assemble" : "bundle")
       gradle(
-        task: "clean assembleRelease",
+        task: releaseTask,
+        build_type: "Release",
+        print_command: false,
         properties: {
           "releaseStorePassword" => ENV["releaseStorePassword"],
           "releaseKeyAlias" => ENV["releaseKeyAlias"],
@@ -37,14 +38,5 @@ platform :android do
           "apiKey" => ENV["apiKey"],
         }
       )
-      firebase_app_distribution(
-          app: "1:1093731557476:android:b7e8390b4cba7797b0ff71",
-          service_credentials_file: "movieapp-752e6-cd5df09c6569.json",
-          testers: "volkovskiyda@gmail.com"
-      )
-  end
-
-  private_lane :release do
-      gradle(task: "clean bundleRelease")
   end
 end

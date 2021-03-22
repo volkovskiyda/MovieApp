@@ -1,2 +1,2 @@
-json_key_file("movieapp-752e6-cd5df09c6569.json")
-package_name("com.gmail.volkovskiyda.movieapp")
+json_key_file "movieapp-service-account.json"
+package_name "com.gmail.volkovskiyda.movieapp"
