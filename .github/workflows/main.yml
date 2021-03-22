@@ -2,7 +2,7 @@ name: Fastlane
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,4 +22,4 @@ jobs:
         releaseKeyPassword: ${{ secrets.RELEASE_KEY_PASSWORD }}
         apiKey: ${{ secrets.API_KEY }}
       with:
-        lane: 'distribute'
+        lane: 'internal'
