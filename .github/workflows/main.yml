@@ -7,19 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.7.2'
-    - name: Service account
-      env:
-        serviceAccount: ${{ secrets.SERVICE_ACCOUNT }}
-      run: echo $serviceAccount > movieapp-service-account.json
-    - uses: maierj/fastlane-action@v2.0.1
-      env:
-        releaseStorePassword: ${{ secrets.RELEASE_STORE_PASSWORD }}
-        releaseKeyAlias: ${{ secrets.RELEASE_KEY_ALIAS }}
-        releaseKeyPassword: ${{ secrets.RELEASE_KEY_PASSWORD }}
-        apiKey: ${{ secrets.API_KEY }}
-      with:
-        lane: 'internal'
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+      - name: Service account
+        env:
+          serviceAccount: ${{ secrets.SERVICE_ACCOUNT }}
+        run: echo $serviceAccount > movieapp-service-account.json
+      - name: Deploy internal
+        env:
+          releaseStorePassword: ${{ secrets.RELEASE_STORE_PASSWORD }}
+          releaseKeyAlias: ${{ secrets.RELEASE_KEY_ALIAS }}
+          releaseKeyPassword: ${{ secrets.RELEASE_KEY_PASSWORD }}
+          apiKey: ${{ secrets.API_KEY }}
+        run: bundle exec fastlane internal
