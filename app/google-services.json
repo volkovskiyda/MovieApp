@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "1093731557476-dcehlhkoj6mp6a51maidliu2uhibeir7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gmail.volkovskiyda.movieapp",
-            "certificate_hash": "25e9549ff4ba2c852c83636b294bab26af940ee5"
-          }
-        },
-        {
           "client_id": "1093731557476-ohanmt11f7iv2oggc9ufg0149013as1b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,6 +29,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyAgJrQCvsPixHCh2cC56OGPOiQVTw2AwaY"
+        },
+        {
+          "current_key": "AIzaSyBOqNqrNUt92EwCB8mRXX4vPMNhr1eezW8"
         }
       ],
       "services": {
@@ -74,6 +69,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyAgJrQCvsPixHCh2cC56OGPOiQVTw2AwaY"
+        },
+        {
+          "current_key": "AIzaSyBOqNqrNUt92EwCB8mRXX4vPMNhr1eezW8"
         }
       ],
       "services": {

@@ -5,6 +5,8 @@ build
 captures
 release
 .env
+apikey.properties
+keystore.properties
 local.properties
 movieapp-service-account.json
 fastlane/*
