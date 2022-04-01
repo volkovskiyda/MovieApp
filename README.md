@@ -2,11 +2,10 @@
 
 ##### Environment
 
-- Android Studio Bumblebee | 2021.1.1 Beta 2
-- OpenJDK version 11.0.12
-- Kotlin version 1.5.31
+- Android Studio Bumblebee | 2021.1.1 Patch 2
+- OpenJDK version 11.0.14.1
+- Kotlin version 1.6.10
 - Gradle 7.2
-- Hilt 2.40
 
 #### Project requirements
 
